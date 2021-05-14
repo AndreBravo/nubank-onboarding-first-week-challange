@@ -9,7 +9,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
                     :purchase   {:amount    100.00
-                                  :date     "01/02/2021"
+                                  :date     "2021-02-01"
                                   :seller   "McDonalds"
                                   :category "FOOD"
                                   }})
@@ -22,7 +22,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
   :purchase                     {:amount 120.00
-                :date                    "01/02/2021"
+                :date                    "2021-02-01"
                 :seller                  "Amazon"
                 :category                "RETAIL"
                 }})
@@ -36,7 +36,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
   :purchase                     {:amount 500.00
-                :date                    "02/02/2021"
+                :date                    "2021-02-02"
                 :seller                  "Alura"
                 :category                "EDUCATION"
                 }})
@@ -50,7 +50,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
                     :purchase   {:amount    500.00
-                                  :date     "02/02/2021"
+                                  :date     "2021-02-02"
                                   :seller   "Coursera"
                                   :category "EDUCATION"
                                   }})
@@ -65,7 +65,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
   :purchase                     {:amount 500.00
-                :date                    "02/02/2021"
+                :date                    "2021-02-02"
                 :seller                  "Alura"
                 :category                "EDUCATION"
                 }})
@@ -79,7 +79,7 @@
                                  :expiration "10/06/2022"
                                  :credit 1000.00 }
   :purchase                     {:amount 500.00
-                :date                    "02/02/2021"
+                :date                    "2021-02-02"
                 :seller                  "Amazon"
                 :category                "RETAIL"
                 }})
