@@ -4,30 +4,31 @@
 
 (def db-uri "datomic:dev://localhost:4334/credit-card")
 
-(defn- create-database
+(defn get-connection [] (d/connect db-uri))
+
+(defn create-database
   []
   (d/create-database db-uri)
-  (d/connect db-uri))
-
-(def conn (create-database))
+  (get-connection))
 
 (defn- transact-data
-  [schema]
-  (d/transact conn schema))
+  [data]
+  (d/transact (get-connection) data))
 
 (defn delete-database
   []
   (d/delete-database db-uri))
 
 (defn import-schema
-  [conn schema]
+  [schema]
   (transact-data schema))
 
 (defn insert-data
-  [conn data]
+  [data]
   (transact-data data))
 
 (defn query
-  []
-  (d/q '[:find ?id
-         :where [?id :credit-card:id ]] (d/db conn)))
+  [query]
+  (d/q query))
+
+
