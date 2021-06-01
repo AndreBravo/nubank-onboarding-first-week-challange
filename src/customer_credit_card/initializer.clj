@@ -1,6 +1,6 @@
 (ns customer-credit-card.initializer
   (:require [customer-credit-card.database.db :as db]
-            [customer-credit-card.database.model :as m]
+            [customer-credit-card.database.schema :as m]
             [customer-credit-card.insertions :as i]))
 
 (defn setup-db []

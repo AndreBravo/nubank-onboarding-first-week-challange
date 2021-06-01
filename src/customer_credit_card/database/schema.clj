@@ -1,4 +1,4 @@
-(ns customer-credit-card.database.model)
+(ns customer-credit-card.database.schema)
 
 (def customer
   [{:db/ident       :customer/uuid
