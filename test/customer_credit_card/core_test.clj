@@ -4,6 +4,6 @@
 
 (deftest get-resume-test
   (testing "Testando"
-    (let [resume (c.core/resume )]
+    (let [resume (c.core/resume)]
       (println "Quantidade na fila" (count resume))
       (is (= 3 (count resume))))))

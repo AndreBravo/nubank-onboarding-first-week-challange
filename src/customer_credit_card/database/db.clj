@@ -27,35 +27,40 @@
   [data]
   (transact-data data))
 
-(defn query
-  [query]
-  (d/q query))
-
-(defn get-all-customers-with-credit-cards []
+(defn find-all-customers-with-credit-cards []
   (d/q '[:find (pull ?entity [*]) (pull ?credit-card [*]) (pull ?transaction [*])
          :keys :customer :credit-card :transactions
          :where [?entity :customer/uuid ?uuid]
-         [?credit-card :credit-card/customer-id ?uuid]
-         [?credit-card :credit-card/transactions ?tx-uuid]
-         [?transaction :transaction/uuid ?tx-uuid]] (d/db (get-connection))))
+                [?credit-card :credit-card/customer-id ?uuid]
+                [?credit-card :credit-card/uuid ?credit-card-uuid]
+                [?transaction :transaction/credit-card-uuid ?credit-card-uuid]] (d/db (get-connection))))
 
-(defn get-credit-card-by-customer-id
+(defn find-credit-card-by-customer-id
   [customer-uuids]
   (d/q '[:find (pull ?entity [*])
          :in $ [?customer-uuid ...]
          :where [?entity :credit-card/customer-id ?customer-uuid]] (d/db (get-connection)) customer-uuids))
 
-(defn get-all-customers []
+(defn find-all-customers []
   (d/q '[:find [(pull ?entity [*]) ...]
          :where [?entity :customer/uuid]] (d/db (get-connection))))
 
-(defn get-all-transactions-by-customer-id
+(defn find-transactions-by-customer-id
   [customer-uuid]
   (d/q '[:find [(pull ?transaction [*]) ...]
          :in $ ?customer-uuid
          :where [?credit-card :credit-card/customer-id ?customer-uuid]
-         [?credit-card :credit-card/transactions ?tx-uuid]
-         [?transaction :transaction/uuid ?tx-uuid]] (d/db (get-connection)) customer-uuid))
+                [?credit-card :credit-card/uuid ?credit-card-uuid]
+                [?transaction :transaction/credit-card-uuid ?credit-card-uuid]] (d/db (get-connection)) customer-uuid))
+
+(defn find-transaction-by-seller
+  [customer-uuid seller]
+  (d/q '[:find [(pull ?transaction [*]) ...]
+         :in $ ?customer-uuid ?transaction-seller
+         :where [?credit-card :credit-card/customer-id ?customer-uuid]
+                [?credit-card :credit-card/uuid ?credit-card-uuid]
+                [?transaction :transaction/credit-card-uuid ?credit-card-uuid]
+                [?transaction :transaction/seller ?transaction-seller]] (d/db (get-connection)) customer-uuid seller))
 
 
 

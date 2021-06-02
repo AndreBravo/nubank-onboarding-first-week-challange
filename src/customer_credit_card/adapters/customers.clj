@@ -1,21 +1,32 @@
 (ns customer-credit-card.adapters.customers
-  (:require [customer-credit-card.database.db :as ddb]))
+  (:import (java.util UUID))
+  (:require [customer-credit-card.database.db :as c.db]
+            [customer-credit-card.logic :as c.logic]))
 
-(defn map-customer-transactions
+(defn- get-customers
+  []
+  (c.db/find-all-customers))
+
+(defn- get-transactions
+  [customer-uuid]
+  (c.db/find-transactions-by-customer-id customer-uuid))
+
+(defn- map-customer-and-transactions
   [customer]
-  (let [customer-uuid (:customer/uuid customer)]
-    {:customer customer
-     :transactions (ddb/get-all-transactions-by-customer-id customer-uuid)}))
+  (c.logic/map-customer-with-transactions customer (get-transactions (get customer :customer/uuid))))
 
-(defn get-customers-with-transactions []
-  (nu/tap (map map-customer-transactions (ddb/get-all-customers))))
+(defn- map-customers []
+  (map map-customer-and-transactions (get-customers)))
 
-(get-customers-with-transactions)
+(defn get-full-resume
+  []
+  (map-customers))
 
+(defn find-transactions-by-seller
+  []
+  (c.db/find-transaction-by-seller (UUID/fromString "77a048d1-c1d5-48c8-9535-fa60dbe48308") "Samsung"))
 
-(->> (ddb/transactions)
-     (get-resume)
-     pprint)
-
+(nu/tap (get-full-resume))
+(nu/tap (find-transactions-by-seller))
 
 

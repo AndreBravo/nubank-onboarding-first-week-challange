@@ -50,11 +50,6 @@
     :db/cardinality :db.cardinality/one
     :db/doc         "Card expire at"}
 
-   {:db/ident       :credit-card/transactions
-    :db/valueType   :db.type/uuid
-    :db/cardinality :db.cardinality/many
-    :db/doc         "List of transactions UUIDs"}
-
    {:db/ident       :credit-card/customer-id
     :db/valueType   :db.type/uuid
     :db/cardinality :db.cardinality/one
@@ -86,5 +81,10 @@
    {:db/ident       :transaction/category
     :db/valueType   :db.type/string
     :db/cardinality :db.cardinality/one
-    :db/doc         "Transaction Category"}])
+    :db/doc         "Transaction Category"}
+
+   {:db/ident       :transaction/credit-card-uuid
+    :db/valueType   :db.type/uuid
+    :db/cardinality :db.cardinality/one
+    :db/doc         "Credit Card UUID for correlation"}])
 
